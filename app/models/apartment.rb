@@ -26,6 +26,9 @@ class Apartment < ApplicationRecord
 
   validates :number, presence: true
 
+  scope :by_number, ->(number) { where(number: number) }
+  scope :by_prefix, ->(prefix) { where(prefix: prefix) }
+
   def area_mismatch?
     return false unless fragmented
     return false if child_apartments.empty?

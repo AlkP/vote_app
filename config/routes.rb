@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   resources :surveys do
     resources :questions
 
-    get "answers", to: "answers#edit"   # форма для массового ввода
-    patch "answers", to: "answers#update" # массовое обновление
+    get "answers", to: "answers#edit"
+    patch "answers", to: "answers#update"
+
+    member do
+      get :results
+    end
   end
 end

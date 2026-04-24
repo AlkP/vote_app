@@ -1,0 +1,60 @@
+h1.mb-4 = "#{@survey.name} - Voting Results"
+
+- if @results.empty?
+  .alert.alert-info No questions in this survey yet.
+- else
+  - @results.each do |item|
+    .card.mb-4
+      .card-header.bg-primary.text-white
+        h5.mb-0 = item[:question].name
+      .card-body
+        - results = item[:results]
+        - total_area = results[:total_area]
+
+        .row.mb-3
+          .col-md-6
+            strong Total voting area: 
+            = number_with_precision(total_area, precision: 2)
+            |  m²
+          .col-md-6
+            strong Total votes: 
+            = results[:yes][:count] + results[:no][:count] + results[:neutral][:count]
+
+        .table-responsive
+          table.table.table-bordered
+            thead.table-dark
+              tr
+                th Vote
+                th Area (m²)
+                th Percentage
+                th Votes Count
+            tbody
+              tr.table-success
+                td ✓ Yes
+                td = number_with_precision(results[:yes][:area], precision: 2)
+                td
+                  .progress
+                    .progress-bar.bg-success role="progressbar" style="width: #{results[:yes][:percent]}%"
+                    span.ms-2 = "#{results[:yes][:percent]}%"
+                td = results[:yes][:count]
+
+              tr.table-danger
+                td ✗ No
+                td = number_with_precision(results[:no][:area], precision: 2)
+                td
+                  .progress
+                    .progress-bar.bg-danger role="progressbar" style="width: #{results[:no][:percent]}%"
+                    span.ms-2 = "#{results[:no][:percent]}%"
+                td = results[:no][:count]
+
+              tr.table-secondary
+                td ⚫ Neutral
+                td = number_with_precision(results[:neutral][:area], precision: 2)
+                td
+                  .progress
+                    .progress-bar.bg-secondary role="progressbar" style="width: #{results[:neutral][:percent]}%"
+                    span.ms-2 = "#{results[:neutral][:percent]}%"
+                td = results[:neutral][:count]
+
+.d-flex.justify-content-end.mt-3
+  = link_to "Back", survey_answers_path(@survey), class: "btn btn-secondary"

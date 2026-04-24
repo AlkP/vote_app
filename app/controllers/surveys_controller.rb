@@ -1,5 +1,5 @@
 class SurveysController < ApplicationController
-  before_action :set_survey, only: %i[edit update destroy]
+  before_action :set_survey, only: %i[edit update destroy results]
 
   def index
     @surveys = Survey.all.order(id: :desc)
@@ -33,6 +33,10 @@ class SurveysController < ApplicationController
     @survey.destroy!
 
     redirect_to surveys_path, notice: "Survey was successfully destroyed.", status: :see_other
+  end
+
+  def results
+    @results = @survey.full_results
   end
 
   private

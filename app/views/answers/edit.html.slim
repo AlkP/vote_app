@@ -22,6 +22,6 @@ h1.mb-4 = "#{@survey.name} - Survey Answers"
                         {},
                         class: "form-select form-select-sm"
 
-  .d-flex.justify-content-between.mt-4
-    = link_to "Back", surveys_path, class: "btn btn-secondary"
+  .d-flex.justify-content-end.mt-3
+    = link_to "Back", surveys_path, class: "btn btn-secondary me-2"
     = f.submit "Save All", class: "btn btn-primary"
