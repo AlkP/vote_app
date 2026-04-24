@@ -15,15 +15,18 @@ class AnswersController < ApplicationController
     Answer.transaction do
       answers_params.each do |key, vote_value|
         apartment_id, question_id = key.split("_").map(&:to_i)
-        next if vote_value.blank?
 
         answer = Answer.find_or_initialize_by(
           apartment_id: apartment_id,
           question_id: question_id
         )
 
-        answer.vote = vote_value
-        answer.save!
+        if vote_value.blank?
+          answer.destroy if answer.persisted?
+        else
+          answer.vote = vote_value
+          answer.save!
+        end
       end
     end
 
