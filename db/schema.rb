@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_094428) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_24_113831) do
   create_table "apartments", force: :cascade do |t|
     t.float "area"
     t.datetime "created_at", null: false
@@ -22,6 +22,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_094428) do
     t.datetime "updated_at", null: false
     t.index ["number"], name: "index_apartments_on_number"
     t.index ["parent_apartment_id"], name: "index_apartments_on_parent_apartment_id"
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "description"
+    t.string "name"
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "apartments", "apartments", column: "parent_apartment_id"

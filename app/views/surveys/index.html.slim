@@ -1,0 +1,17 @@
+p style="color: green" = notice
+
+h1 Surveys
+
+.table-responsive
+  table.table.table-striped.table-hover.align-middle
+    thead.table-dark
+      tr
+        th Number
+        th Description
+        th.text-center Actions
+    tbody
+      - @surveys.each do |survey|
+        == render survey
+
+.d-flex.justify-content-end.mt-3
+  = link_to "New survey", new_survey_path, class: "btn btn-primary"
