@@ -1,0 +1,8 @@
+tr
+  td = question.name
+  td.text-center
+    .btn-group.btn-group-sm role="group"
+      = link_to "Edit", edit_survey_question_path(@survey, question), class: "btn btn-outline-warning"
+      = link_to "Delete", survey_question_path(@survey, question),
+              data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+              class: "btn btn-outline-danger"

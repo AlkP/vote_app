@@ -1,0 +1,17 @@
+p style="color: green" = notice
+
+h1 Questions
+
+.table-responsive
+  table.table.table-striped.table-hover.align-middle
+    thead.table-dark
+      tr
+        th Number
+        th.text-center Actions
+    tbody
+      - @questions.each do |question|
+        == render question
+
+.d-flex.justify-content-end.mt-3
+  = link_to "New question", new_survey_question_path(@survey), class: "btn btn-primary"
+  = link_to "Cancel", surveys_path, class: "btn btn-secondary ms-2"

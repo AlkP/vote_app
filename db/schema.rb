@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_113831) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_24_120109) do
   create_table "apartments", force: :cascade do |t|
     t.float "area"
     t.datetime "created_at", null: false
@@ -24,6 +24,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_113831) do
     t.index ["parent_apartment_id"], name: "index_apartments_on_parent_apartment_id"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.integer "survey_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_id"], name: "index_questions_on_survey_id"
+  end
+
   create_table "surveys", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "description"
@@ -32,4 +40,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_113831) do
   end
 
   add_foreign_key "apartments", "apartments", column: "parent_apartment_id"
+  add_foreign_key "questions", "surveys"
 end

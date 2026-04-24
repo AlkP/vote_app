@@ -1,5 +1,6 @@
 survey_params =
   [
+    { name: 'Test', description: '' },
     { name: 'Опрос номер первый', description: 'Самый первый опрос, он самый важный' },
   ]
 
