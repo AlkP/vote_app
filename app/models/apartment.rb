@@ -25,4 +25,19 @@ class Apartment < ApplicationRecord
   has_many   :questions, through: :answers
 
   validates :number, presence: true
+
+  def area_mismatch?
+    return false unless fragmented
+    return false if child_apartments.empty?
+
+    total_child_area = child_apartments.sum(:area).to_f
+    area.to_f != total_child_area
+  end
+
+  def area_difference
+    return 0 unless fragmented
+
+    total_child_area = child_apartments.sum(:area).to_f
+    area.to_f - total_child_area
+  end
 end

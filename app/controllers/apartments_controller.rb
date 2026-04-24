@@ -3,6 +3,11 @@ class ApartmentsController < ApplicationController
 
   def index
     @apartments = Apartment.all
+    mismatched = Apartment.where(fragmented: true).select(&:area_mismatch?)
+    if mismatched.present?
+      numbers = mismatched.map { |a| a.number }.join(", ")
+      flash.now[:alert] = "Следующие квартиры имеют несоответствие заявленой площади и дробей: #{numbers}"
+    end
   end
 
   def new
