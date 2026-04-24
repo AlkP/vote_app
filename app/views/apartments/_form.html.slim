@@ -1,0 +1,53 @@
+= form_with(model: apartment, class: "needs-validation") do |form|
+  - if apartment.errors.any?
+    .row
+      .col-md-3
+      .col-md-6
+        .alert.alert-danger.alert-dismissible.fade.show role="alert"
+          h4.alert-heading = "#{pluralize(apartment.errors.count, "error")} prohibited this apartment from being saved:"
+          ul.mb-0
+            - apartment.errors.each do |error|
+              li = error.full_message
+          button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+    .col-md-2
+
+  .row
+    .col-md-3
+    .col-md-6
+      .mb-3
+        = form.label :number, class: "form-label fw-bold"
+        = form.text_field :number, class: "form-control", placeholder: "Enter apartment number"
+
+      .mb-3
+        = form.label :prefix, class: "form-label fw-bold"
+        = form.text_field :prefix, class: "form-control", placeholder: "e.g., FL, RM, APT"
+
+      .mb-3
+        = form.label :name, class: "form-label fw-bold"
+        = form.text_field :name, class: "form-control", placeholder: "Apartment name"
+
+      .mb-3
+        .form-check.form-switch
+          = form.check_box :fragmented, class: "form-check-input"
+          = form.label :fragmented, class: "form-check-label fw-bold"
+          small.form-text.d-block.text-muted Check if fragmented
+
+      .mb-3
+        = form.label :area, class: "form-label fw-bold"
+        .input-group
+          span.input-group-text m²
+          = form.text_field :area, class: "form-control", placeholder: "Area in square meters"
+
+      .mb-3
+        = form.label :parent_apartment_id, "Parent Apartment", class: "form-label fw-bold"
+        = form.collection_select :parent_apartment_id,
+                Apartment.where(fragmented: true).order(:number, :prefix),
+                :id,
+                ->(a) { "#{a.number} #{a.prefix}".strip },
+                { include_blank: "Select parent apartment (optional)" },
+                { class: "form-select" }
+
+      .mt-4
+        = form.submit class: "btn btn-primary px-4"
+        = link_to "Cancel", apartments_path, class: "btn btn-secondary ms-2"
+      .col-md-2

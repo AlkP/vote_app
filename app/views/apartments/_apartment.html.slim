@@ -1,0 +1,13 @@
+tr
+  td = apartment.number
+  td = apartment.prefix
+  td = apartment.parent_apartment&.number
+  td = apartment.name
+  td = apartment.fragmented ? "✓" : "✗"
+  td = apartment.area
+  td.text-center
+    .btn-group.btn-group-sm role="group"
+      = link_to "Edit", edit_apartment_path(apartment), class: "btn btn-outline-warning"
+      = link_to "Delete", apartment,
+              data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+              class: "btn btn-outline-danger"

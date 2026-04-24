@@ -1,0 +1,21 @@
+p style="color: green" = notice
+
+h1.mb-4 Apartments
+
+.table-responsive
+  table.table.table-striped.table-hover.align-middle
+    thead.table-dark
+      tr
+        th Number
+        th Prefix
+        th Parent
+        th Name
+        th Fragmented
+        th Area
+        th.text-center Actions
+    tbody
+      - @apartments.each do |apartment|
+        == render apartment
+
+.d-flex.justify-content-end.mt-3
+  = link_to "New apartment", new_apartment_path, class: "btn btn-primary"
