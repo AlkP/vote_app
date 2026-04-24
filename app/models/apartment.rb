@@ -21,6 +21,8 @@
 class Apartment < ApplicationRecord
   belongs_to :parent_apartment, class_name: "Apartment", optional: true
   has_many   :child_apartments, class_name: "Apartment", foreign_key: "parent_apartment_id"
+  has_many   :answers
+  has_many   :questions, through: :answers
 
   validates :number, presence: true
 end

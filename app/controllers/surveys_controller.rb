@@ -2,7 +2,7 @@ class SurveysController < ApplicationController
   before_action :set_survey, only: %i[edit update destroy]
 
   def index
-    @surveys = Survey.all
+    @surveys = Survey.all.order(id: :desc)
   end
 
   def new

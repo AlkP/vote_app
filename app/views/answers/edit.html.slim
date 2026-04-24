@@ -1,0 +1,27 @@
+h1.mb-4 = "#{@survey.name} - Survey Answers"
+
+= form_with url: survey_answers_path(@survey), method: :patch, local: true do |f|
+  .table-responsive
+    table.table.table-sm.table-bordered.table-hover
+      thead.table-dark
+        tr
+          th Apartment
+          - @questions.each do |question|
+            th.text-center = question.name
+      tbody
+        - @apartments.each do |apartment|
+          tr
+            td.fw-bold = "#{apartment.number} #{apartment.prefix}".strip
+            - @questions.each do |question|
+              - key = "#{apartment.id}_#{question.id}"
+              - current_answer = @answers[[apartment.id, question.id]]
+              td
+                = f.select "answers[#{key}]",
+                        options_for_select([["Select...", ""], ["✓ Yes", "yes"], ["✗ No", "no"], ["⚫ Neutral", "neutral"]],
+                                selected: current_answer&.vote),
+                        {},
+                        class: "form-select form-select-sm"
+
+  .d-flex.justify-content-between.mt-4
+    = link_to "Back", surveys_path, class: "btn btn-secondary"
+    = f.submit "Save All", class: "btn btn-primary"

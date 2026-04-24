@@ -1,7 +1,9 @@
 tr
+  td = survey.id
   td = survey.name
   td = survey.description
   td = link_to "Questions", survey_questions_path(survey)
+  td = link_to "Manage Answers", survey_answers_path(survey), class: "btn btn-sm btn-success"
   td.text-center
     .btn-group.btn-group-sm role="group"
       = link_to "Edit", edit_survey_path(survey), class: "btn btn-outline-warning"

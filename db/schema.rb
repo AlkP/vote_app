@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_120109) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_24_131136) do
+  create_table "answers", force: :cascade do |t|
+    t.integer "apartment_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "question_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "vote", limit: 1, null: false
+    t.index ["apartment_id", "question_id"], name: "index_answers_on_apartment_id_and_question_id", unique: true
+    t.index ["apartment_id"], name: "index_answers_on_apartment_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
   create_table "apartments", force: :cascade do |t|
     t.float "area"
     t.datetime "created_at", null: false
@@ -39,6 +50,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_120109) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "answers", "apartments"
+  add_foreign_key "answers", "questions"
   add_foreign_key "apartments", "apartments", column: "parent_apartment_id"
   add_foreign_key "questions", "surveys"
 end

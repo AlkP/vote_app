@@ -5,5 +5,8 @@ Rails.application.routes.draw do
   resources :apartments
   resources :surveys do
     resources :questions
+
+    get "answers", to: "answers#edit"   # форма для массового ввода
+    patch "answers", to: "answers#update" # массовое обновление
   end
 end
