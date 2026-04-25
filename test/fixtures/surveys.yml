@@ -12,9 +12,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyString
+  name: "First Survey"
+  description: "This is the first test survey"
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
 
 two:
-  name: MyString
-  description: MyString
+  name: "Second Survey"
+  description: "This is the second test survey"
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+three:
+  name: "Building Area Survey"
+  description: "Survey about building areas"
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>

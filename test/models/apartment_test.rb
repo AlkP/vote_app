@@ -18,7 +18,7 @@
 #  index_apartments_on_parent_apartment_id  (parent_apartment_id)
 #
 
-require "test_helper"
+require 'test_helper'
 
 class ApartmentTest < ActiveSupport::TestCase
   # test "the truth" do

@@ -16,7 +16,37 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: "Do you like the building maintenance?"
+  survey: one
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
 
 two:
-  name: MyString
+  name: "Is the parking sufficient?"
+  survey: one
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+three:
+  name: "Are you satisfied with the security?"
+  survey: two
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+four:
+  name: "Would you recommend this building?"
+  survey: two
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+five:
+  name: "Is the area calculation correct?"
+  survey: three
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+six:
+  name: "Do you agree with the fragmentation?"
+  survey: three
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>

@@ -14,7 +14,7 @@ class AnswersController < ApplicationController
     answers_params = params[:answers] || {}
     Answer.transaction do
       answers_params.each do |key, vote_value|
-        apartment_id, question_id = key.split("_").map(&:to_i)
+        apartment_id, question_id = key.split('_').map(&:to_i)
 
         answer = Answer.find_or_initialize_by(
           apartment_id: apartment_id,
@@ -30,9 +30,9 @@ class AnswersController < ApplicationController
       end
     end
 
-    redirect_to survey_answers_path(@survey), notice: "Answers successfully updated."
-  rescue => e
-    redirect_to survey_answers_path(@survey), alert: "Error: #{e.message}"
+    redirect_to survey_answers_path(@survey), notice: t('.success')
+  rescue StandardError => e
+    redirect_to survey_answers_path(@survey), alert: t('.error', message: e.message)
   end
 
   private

@@ -18,8 +18,76 @@
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  vote: 1
+# Survey 1 answers
+answer_one_survey_one:
+  vote: <%= Answer.votes[:yes] %>
+  apartment: one
+  question: one
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
 
-two:
-  vote: 1
+answer_two_survey_one:
+  vote: <%= Answer.votes[:no] %>
+  apartment: two
+  question: one
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+answer_three_survey_one:
+  vote: <%= Answer.votes[:neutral] %>
+  apartment: three
+  question: one
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+# Question two (Survey 1) answers
+answer_four_survey_one:
+  vote: <%= Answer.votes[:yes] %>
+  apartment: one
+  question: two
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+answer_five_survey_one:
+  vote: <%= Answer.votes[:yes] %>
+  apartment: two
+  question: two
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+# Survey 2 answers
+answer_six_survey_two:
+  vote: <%= Answer.votes[:no] %>
+  apartment: one
+  question: three
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+answer_seven_survey_two:
+  vote: <%= Answer.votes[:yes] %>
+  apartment: two
+  question: four
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+# Fragmented apartments answers
+answer_eight_fragmented:
+  vote: <%= Answer.votes[:yes] %>
+  apartment: fragmented_child_one
+  question: five
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+answer_nine_fragmented:
+  vote: <%= Answer.votes[:yes] %>
+  apartment: fragmented_child_two
+  question: five
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+answer_ten_fragmented:
+  vote: <%= Answer.votes[:no] %>
+  apartment: fragmented_child_three
+  question: six
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>

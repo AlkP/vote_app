@@ -13,7 +13,7 @@
 #  index_questions_on_survey_id  (survey_id)
 #
 
-require "test_helper"
+require 'test_helper'
 
 class QuestionTest < ActiveSupport::TestCase
   # test "the truth" do

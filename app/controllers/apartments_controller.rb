@@ -1,13 +1,13 @@
 class ApartmentsController < ApplicationController
-  before_action :set_apartment, only: %i[ edit update destroy]
+  before_action :set_apartment, only: %i[edit update destroy]
 
   def index
     @apartments = Apartment.all
     mismatched = Apartment.where(fragmented: true).select(&:area_mismatch?)
-    if mismatched.present?
-      numbers = mismatched.map { |a| a.number }.join(", ")
-      flash.now[:alert] = "Следующие квартиры имеют несоответствие заявленой площади и дробей: #{numbers}"
-    end
+    return if mismatched.blank?
+
+    numbers = mismatched.map(&:number).join(', ')
+    flash.now[:alert] = t('.area_mismatch.alert', numbers: numbers)
   end
 
   def new
@@ -20,24 +20,24 @@ class ApartmentsController < ApplicationController
     @apartment = Apartment.new(apartment_params)
 
     if @apartment.save
-      redirect_to apartments_path, notice: "Apartment was successfully created."
+      redirect_to apartments_path, notice: t('.create.success')
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
   def update
     if @apartment.update(apartment_params)
-      redirect_to apartments_path, notice: "Apartment was successfully updated.", status: :see_other
+      redirect_to apartments_path, notice: t('.update.success'), status: :see_other
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
   def destroy
     @apartment.destroy!
 
-    redirect_to apartments_path, notice: "Apartment was successfully destroyed.", status: :see_other
+    redirect_to apartments_path, notice: t('.destroy.success'), status: :see_other
   end
 
   private

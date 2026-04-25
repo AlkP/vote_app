@@ -16,24 +16,24 @@ class QuestionsController < ApplicationController
     @question = @survey.questions.new(question_params)
 
     if @question.save
-      redirect_to survey_questions_path(@survey), notice: "Question was successfully created."
+      redirect_to survey_questions_path(@survey), notice: t('.create.success')
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
   def update
     if @question.update(question_params)
-      redirect_to survey_questions_path(@survey), notice: "Question was successfully updated.", status: :see_other
+      redirect_to survey_questions_path(@survey), notice: t('.update.success'), status: :see_other
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
   def destroy
     @question.destroy!
 
-    redirect_to survey_questions_path(@survey), notice: "Question was successfully destroyed.", status: :see_other
+    redirect_to survey_questions_path(@survey), notice: t('.destroy.success'), status: :see_other
   end
 
   private
@@ -47,6 +47,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.expect(question: [ :name ])
+    params.expect(question: [:name])
   end
 end

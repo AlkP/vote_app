@@ -19,10 +19,14 @@
 #
 
 class Apartment < ApplicationRecord
-  belongs_to :parent_apartment, class_name: "Apartment", optional: true
-  has_many   :child_apartments, class_name: "Apartment", foreign_key: "parent_apartment_id"
-  has_many   :answers
-  has_many   :questions, through: :answers
+  belongs_to :parent_apartment, class_name: 'Apartment', optional: true
+  has_many   :child_apartments,
+             class_name: 'Apartment',
+             foreign_key: 'parent_apartment_id',
+             inverse_of: :parent_apartment,
+             dependent: :nullify
+  has_many   :answers, dependent: :destroy
+  has_many   :questions, through: :answers, dependent: :nullify
 
   validates :number, presence: true
 
@@ -33,8 +37,8 @@ class Apartment < ApplicationRecord
     return false unless fragmented
     return false if child_apartments.empty?
 
-    total_child_area = child_apartments.sum(:area).to_f
-    area.to_f != total_child_area
+    total_child_area = child_apartments.sum(:area)
+    area.to_f.round(2) != total_child_area.round(2)
   end
 
   def area_difference

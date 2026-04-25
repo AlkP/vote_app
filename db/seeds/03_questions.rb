@@ -2,7 +2,7 @@ question_params =
   [
     { name: 'Test', survey_name: 'Test' },
     { name: 'Самый первый вопрос', survey_name: 'Опрос номер первый' },
-    { name: 'Самый важный вопрос', survey_name: 'Опрос номер первый' },
+    { name: 'Самый важный вопрос', survey_name: 'Опрос номер первый' }
   ]
 
 question_params.each do |params|

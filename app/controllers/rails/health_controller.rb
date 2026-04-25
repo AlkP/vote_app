@@ -1,5 +1,5 @@
 module Rails
-  class HealthController < ActionController::Base
+  class HealthController < ApplicationController
     def show
       render plain: :ok
     end

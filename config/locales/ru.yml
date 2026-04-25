@@ -3,4 +3,34 @@ ru:
   main_nav:
     apartments: Квартиры
     surveys: Опросы
-  hello: "Hello world"
+
+  apartments:
+    create:
+      success: 'Квартира успешно создана'
+    update:
+      success: 'Квартира успешно обновлена'
+    destroy:
+      success: 'Квартира успешно удалена'
+    area_mismatch:
+      alert: "Следующие квартиры имеют несоответствие заявленой площади и дробей: %{numbers}"
+
+  questions:
+    create:
+      success: 'Вопрос успешно создан'
+    update:
+      success: 'Вопрос успешно обновлен'
+    destroy:
+      success: 'Вопрос успешно удален'
+
+  surveys:
+    create:
+      success: 'Опрос успешно создан'
+    update:
+      success: 'Опрос успешно обновлен'
+    destroy:
+      success: 'Опрос успешно удален'
+
+  answers:
+    update:
+      success: 'Ответы успешно обновлены'
+      error: "Ошибка: %{message}"

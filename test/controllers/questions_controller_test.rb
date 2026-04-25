@@ -1,48 +1,44 @@
-require "test_helper"
+require 'test_helper'
 
 class QuestionsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @survey = surveys(:one)
     @question = questions(:one)
   end
 
-  test "should get index" do
-    get questions_url
+  test 'should get index' do
+    get survey_questions_url(@survey)
     assert_response :success
   end
 
-  test "should get new" do
-    get new_question_url
+  test 'should get new' do
+    get new_survey_question_url(@survey)
     assert_response :success
   end
 
-  test "should create question" do
-    assert_difference("Question.count") do
-      post questions_url, params: { question: { name: @question.name } }
+  test 'should create question' do
+    assert_difference('Question.count') do
+      post survey_questions_url(@survey), params: { question: { name: 'New Question' } }
     end
 
-    assert_redirected_to question_url(Question.last)
+    assert_redirected_to survey_questions_url(@survey)
   end
 
-  test "should show question" do
-    get question_url(@question)
+  test 'should get edit' do
+    get edit_survey_question_url(@survey, @question)
     assert_response :success
   end
 
-  test "should get edit" do
-    get edit_question_url(@question)
-    assert_response :success
+  test 'should update question' do
+    patch survey_question_url(@survey, @question), params: { question: { name: 'Updated Question' } }
+    assert_redirected_to survey_questions_url(@survey)
   end
 
-  test "should update question" do
-    patch question_url(@question), params: { question: { name: @question.name } }
-    assert_redirected_to question_url(@question)
-  end
-
-  test "should destroy question" do
-    assert_difference("Question.count", -1) do
-      delete question_url(@question)
+  test 'should destroy question' do
+    assert_difference('Question.count', -1) do
+      delete survey_question_url(@survey, @question)
     end
 
-    assert_redirected_to questions_url
+    assert_redirected_to survey_questions_url(@survey)
   end
 end

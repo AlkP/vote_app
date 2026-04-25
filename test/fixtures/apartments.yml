@@ -21,15 +21,71 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  number: MyString
-  prefix: MyString
-  name: MyString
+  number: "101"
+  prefix: "FL"
+  name: "First Floor Apartment"
   fragmented: false
-  area: 1.5
+  area: 45.5
+  parent_apartment_id: nil
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
 
 two:
-  number: MyString
-  prefix: MyString
-  name: MyString
+  number: "202"
+  prefix: "FL"
+  name: "Second Floor Apartment"
   fragmented: false
-  area: 1.5
+  area: 52.3
+  parent_apartment_id: nil
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+three:
+  number: "301"
+  prefix: "FL"
+  name: "Third Floor Apartment"
+  fragmented: false
+  area: 38.7
+  parent_apartment_id: nil
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+fragmented_main:
+  number: "500"
+  prefix: "BLDG"
+  name: "Main Building"
+  fragmented: true
+  area: 150.0
+  parent_apartment_id: nil
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+fragmented_child_one:
+  number: "500/1"
+  prefix: "BLDG"
+  name: "Section 1"
+  fragmented: false
+  area: 60.0
+  parent_apartment_id: <%= ActiveRecord::FixtureSet.identify(:fragmented_main) %>
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+fragmented_child_two:
+  number: "500/2"
+  prefix: "BLDG"
+  name: "Section 2"
+  fragmented: false
+  area: 50.0
+  parent_apartment_id: <%= ActiveRecord::FixtureSet.identify(:fragmented_main) %>
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+fragmented_child_three:
+  number: "500/3"
+  prefix: "BLDG"
+  name: "Section 3"
+  fragmented: false
+  area: 40.0
+  parent_apartment_id: <%= ActiveRecord::FixtureSet.identify(:fragmented_main) %>
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>

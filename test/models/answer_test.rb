@@ -16,7 +16,7 @@
 #  index_answers_on_question_id                   (question_id)
 #
 
-require "test_helper"
+require 'test_helper'
 
 class AnswerTest < ActiveSupport::TestCase
   # test "the truth" do
