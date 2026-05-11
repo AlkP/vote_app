@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_131136) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_10_160825) do
   create_table "answers", force: :cascade do |t|
     t.integer "apartment_id", null: false
     t.datetime "created_at", null: false
@@ -36,6 +36,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_131136) do
   end
 
   create_table "questions", force: :cascade do |t|
+    t.boolean "absolute", default: false, null: false
     t.datetime "created_at", null: false
     t.string "name"
     t.integer "survey_id", null: false

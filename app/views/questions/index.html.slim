@@ -1,15 +1,16 @@
-h1 Questions
+h1 = t('questions.index.title')
 
 .table-responsive
   table.table.table-striped.table-hover.align-middle
     thead.table-dark
       tr
-        th Number
-        th.text-center Actions
+        th = t('questions.index.name')
+        th = t('questions.index.absolute')
+        th.text-center = t('questions.index.actions')
     tbody
       - @questions.each do |question|
         == render question
 
 .d-flex.justify-content-end.mt-3
-  = link_to "Back", surveys_path, class: "btn btn-secondary me-2"
-  = link_to "New question", new_survey_question_path(@survey), class: "btn btn-primary"
+  = link_to t('back'), surveys_path, class: "btn btn-secondary me-2"
+  = link_to t('questions.index.new'), new_survey_question_path(@survey), class: "btn btn-primary"

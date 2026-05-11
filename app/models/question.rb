@@ -3,10 +3,11 @@
 # Table name: questions
 #
 #  id         :integer          not null, primary key
+#  created_at :datetime         not null
 #  name       :string
 #  survey_id  :integer          not null
-#  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  absolute   :boolean          default(FALSE), not null
 #
 # Indexes
 #

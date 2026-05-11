@@ -42,7 +42,7 @@ class AnswersController < ApplicationController
   end
 
   def set_apartments
-    @apartments = Apartment.where(fragmented: false).order(:number, :prefix)
+    @apartments = Apartment.where(fragmented: false).order(Arel.sql('CAST(number AS INTEGER), prefix'))
   end
 
   def set_questions

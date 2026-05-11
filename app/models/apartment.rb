@@ -30,14 +30,23 @@ class Apartment < ApplicationRecord
 
   validates :number, presence: true
 
+  scope :by_fragmented, ->(fragmented) { where(fragmented: fragmented) }
   scope :by_number, ->(number) { where(number: number) }
   scope :by_prefix, ->(prefix) { where(prefix: prefix) }
+
+  def self.full_area
+    by_fragmented(false).sum(:area)
+  end
+
+  def self.full_votes
+    by_fragmented(false).count
+  end
 
   def area_mismatch?
     return false unless fragmented
     return false if child_apartments.empty?
 
-    total_child_area = child_apartments.sum(:area)
+    total_child_area = child_apartments.sum(:area).to_f
     area.to_f.round(2) != total_child_area.round(2)
   end
 

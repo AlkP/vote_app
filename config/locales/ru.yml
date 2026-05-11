@@ -1,36 +1,94 @@
 ru:
+
+  back: Назад
+  edit: Редактировать
+  delete: Удалить
+  confirm: Вы уверены?
+  'yes': Да
+  'no': Нет
+  submit: Сохранить
+  cancel: Отмена
+  close: Закрыть
+
   app_title: Опросник
   main_nav:
     apartments: Квартиры
     surveys: Опросы
 
+  errors:
+    template:
+      header:
+        one: "Обнаружена %{count} ошибка, которая не позволяет сохранить %{model}:"
+        few: "Обнаружено %{count} ошибки, которые не позволяют сохранить %{model}:"
+        many: "Обнаружено %{count} ошибок, которые не позволяют сохранить %{model}:"
+        other: "Обнаружено %{count} ошибки, которые не позволяют сохранить %{model}:"
+
+  activerecord:
+    models:
+      question: Вопрос
+    attributes:
+      question:
+        name: Название вопроса
+        absolute: Абсолютное большинство
+
   apartments:
     create:
-      success: 'Квартира успешно создана'
+      success: Квартира успешно создана
     update:
-      success: 'Квартира успешно обновлена'
+      success: Квартира успешно обновлена
     destroy:
-      success: 'Квартира успешно удалена'
+      success: Квартира успешно удалена
     area_mismatch:
       alert: "Следующие квартиры имеют несоответствие заявленой площади и дробей: %{numbers}"
 
   questions:
+    index:
+      title: Вопросы
+      name: Название
+      absolute: Абсолютное большинство
+      actions: Действия
+      new: Новый вопрос
     create:
-      success: 'Вопрос успешно создан'
+      success: Вопрос успешно создан
     update:
-      success: 'Вопрос успешно обновлен'
+      success: Вопрос успешно обновлен
     destroy:
-      success: 'Вопрос успешно удален'
+      success: Вопрос успешно удален
 
   surveys:
+    index:
+      title: Опросы
+      buttons:
+        questions: Вопросы
+        answers: Редактирование ответов
+        results: Результаты
     create:
-      success: 'Опрос успешно создан'
+      success: Опрос успешно создан
     update:
-      success: 'Опрос успешно обновлен'
+      success: Опрос успешно обновлен
     destroy:
-      success: 'Опрос успешно удален'
+      success: Опрос успешно удален
+    results_title: "%{survey_name} - Результаты голосования"
+    full_area: "Общая площадь квартир: %{area}"
+    full_votes: "Количество собственников с правом голоса: %{count}"
+    vote_area: "Площадь голосовавших квартир: %{area}"
+    no_questions: В этом опросе пока нет вопросов
+    total_voting_area: "Общая площадь голосования: %{area} m²"
+    total_votes: "Всего голосов: %{votes}"
+    vote:
+      'yes': Да
+      'no': Нет
+      neutral: Воздержался
+      did_not_vote: Не голосовали
+    table:
+      vote: Голос
+      area: Площадь (м²)
+      percentage: Процент
+      votes_count: Кол-во голосов
+    actions:
+      back: Назад
 
   answers:
     update:
-      success: 'Ответы успешно обновлены'
+      success: Ответы успешно обновлены
       error: "Ошибка: %{message}"

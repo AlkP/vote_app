@@ -1,13 +1,13 @@
-h1.mb-4 = "#{@survey.name} - Survey Answers"
+h2.mb-4 = @survey.name
 
 = form_with url: survey_answers_path(@survey), method: :patch, local: true do |f|
-  .table-responsive
+  .survey-table-responsive.table-responsive
     table.table.table-sm.table-bordered.table-hover
       thead.table-dark
         tr
           th Apartment
-          - @questions.each do |question|
-            th.text-center = question.name
+          - @questions.each_with_index do |question, index|
+            th.text-center = index + 1
       tbody
         - @apartments.each do |apartment|
           tr
@@ -15,12 +15,12 @@ h1.mb-4 = "#{@survey.name} - Survey Answers"
             - @questions.each do |question|
               - key = "#{apartment.id}_#{question.id}"
               - current_answer = @answers[[apartment.id, question.id]]
+              - vote = current_answer&.vote
               td
                 = f.select "answers[#{key}]",
-                        options_for_select([["Select...", ""], ["✓ Yes", "yes"], ["✗ No", "no"], ["⚫ Neutral", "neutral"]],
-                                selected: current_answer&.vote),
+                        vote_options(vote),
                         {},
-                        class: "form-select form-select-sm"
+                        class: "form-select form-select-sm #{vote_bg_class(vote)}"
 
   .d-flex.justify-content-end.mt-3
     = link_to "Back", surveys_path, class: "btn btn-secondary me-2"

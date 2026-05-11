@@ -39,7 +39,7 @@ Rails:
 plugins:
   - rubocop-performance
   - rubocop-rails
-#  - rubocop-capybara
+  - rubocop-capybara
 #  - rubocop-minitest
 
 Style/AsciiComments:

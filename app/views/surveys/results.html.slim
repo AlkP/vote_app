@@ -1,60 +1,75 @@
-h1.mb-4 = "#{@survey.name} - Voting Results"
+h1.mb-4 = t('surveys.results_title', survey_name: @survey.name)
+h4.mb-4 = t('surveys.full_area', area: Apartment.full_area)
+h4.mb-4 = t('surveys.full_votes', count: Apartment.full_votes)
+h4.mb-4 = t('surveys.vote_area', area: @survey.total_apartments_area_efficient)
 
 - if @results.empty?
-  .alert.alert-info No questions in this survey yet.
+  .alert.alert-info = t('surveys.no_questions')
 - else
-  - @results.each do |item|
+  - @results.each_with_index do |item, index|
     .card.mb-4
       .card-header.bg-primary.text-white
-        h5.mb-0 = item[:question].name
+        h5.mb-0 = "#{index + 1}. #{item[:question].name}"
       .card-body
         - results = item[:results]
         - total_area = results[:total_area]
+        - total_votes = item[:question].absolute ? Apartment.full_votes : results[:yes][:count] + results[:no][:count] + results[:neutral][:count]
 
         .row.mb-3
           .col-md-6
-            strong Total voting area: 
-            = number_with_precision(total_area, precision: 2)
-            |  m²
+            strong = t('surveys.total_voting_area', area: number_with_precision(total_area, precision: 2))
           .col-md-6
-            strong Total votes: 
-            = results[:yes][:count] + results[:no][:count] + results[:neutral][:count]
+            strong = t('surveys.total_votes', votes: results[:votes])
 
         .table-responsive
           table.table.table-bordered
             thead.table-dark
               tr
-                th Vote
-                th Area (m²)
-                th Percentage
-                th Votes Count
+                th = t('surveys.table.vote')
+                th = t('surveys.table.area')
+                th = t('surveys.table.percentage')
+                th = t('surveys.table.votes_count')
             tbody
               tr.table-success
-                td ✓ Yes
+                td = t('surveys.vote.yes')
                 td = number_with_precision(results[:yes][:area], precision: 2)
                 td
-                  .progress
-                    .progress-bar.bg-success role="progressbar" style="width: #{results[:yes][:percent]}%"
+                  .d-flex.align-items-center
+                    .progress.flex-grow-1
+                      .progress-bar.bg-success role="progressbar" style="width: #{results[:yes][:percent]}%"
                     span.ms-2 = "#{results[:yes][:percent]}%"
                 td = results[:yes][:count]
 
               tr.table-danger
-                td ✗ No
+                td = t('surveys.vote.no')
                 td = number_with_precision(results[:no][:area], precision: 2)
                 td
-                  .progress
-                    .progress-bar.bg-danger role="progressbar" style="width: #{results[:no][:percent]}%"
+                  .d-flex.align-items-center
+                    .progress.flex-grow-1
+                      .progress-bar.bg-danger role="progressbar" style="width: #{results[:no][:percent]}%"
                     span.ms-2 = "#{results[:no][:percent]}%"
                 td = results[:no][:count]
 
               tr.table-secondary
-                td ⚫ Neutral
+                td = t('surveys.vote.neutral')
                 td = number_with_precision(results[:neutral][:area], precision: 2)
                 td
-                  .progress
-                    .progress-bar.bg-secondary role="progressbar" style="width: #{results[:neutral][:percent]}%"
+                  .d-flex.align-items-center
+                    .progress.flex-grow-1
+                      .progress-bar.bg-secondary role="progressbar" style="width: #{results[:neutral][:percent]}%"
                     span.ms-2 = "#{results[:neutral][:percent]}%"
                 td = results[:neutral][:count]
 
+              - if item[:question].absolute
+                tr.table-secondary
+                  td = t('surveys.vote.did_not_vote')
+                  td = number_with_precision(results[:did_not_vote][:area], precision: 2)
+                  td
+                    .d-flex.align-items-center
+                      .progress.flex-grow-1
+                        .progress-bar.bg-secondary role="progressbar" style="width: #{results[:did_not_vote][:percent]}%"
+                      span.ms-2 = "#{results[:did_not_vote][:percent]}%"
+                  td = results[:did_not_vote][:count]
+
 .d-flex.justify-content-end.mt-3
-  = link_to "Back", surveys_path, class: "btn btn-secondary"
+  = link_to t('surveys.actions.back'), surveys_path, class: "btn btn-secondary"

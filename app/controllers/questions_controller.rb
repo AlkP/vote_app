@@ -47,6 +47,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.expect(question: [:name])
+    params.expect(question: %i[name absolute])
   end
 end
